@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
@@ -15,12 +14,14 @@ return new class extends Migration
             $table->id();
             $table->string('token');
             $table->string('ref_num');
-            $table->string('order_id');
+            $table->foreignId('order_id')
+                ->constrained('orders')
+                ->noActionOnDelete();
             $table->double('payment_amount');
-            $table->string('card_number');
-            $table->boolean('completed');
+            $table->integer('completion_status')->nullable();
             $table->string('transaction_id')->nullable();
             $table->string('tracking_code')->nullable();
+            $table->string('paid_card')->nullable();
             $table->timestamps();
         });
     }

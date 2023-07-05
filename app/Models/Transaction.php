@@ -14,8 +14,9 @@ class Transaction extends Model
         'ref_num',
         'order_id',
         'payment_amount',
-        'card_number',
-        'completed',
+        'card_id',
+        'paid_card',
+        'completion_status',
         'transaction_id',
         'tracking_code',
     ];
@@ -23,7 +24,7 @@ class Transaction extends Model
     protected $hidden = [
         'id',
         'ref_num',
-        'completed',
+        'completion_status',
         'transaction_id',
     ];
 }
