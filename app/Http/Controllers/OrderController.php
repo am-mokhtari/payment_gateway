@@ -144,8 +144,10 @@ class OrderController extends Controller
                 return redirect()->route('dashboard')->with('danger', 'خطا در اعتبارسنجی:' . Transaction::getGatewayMessage($httpResponse['status']) . ' ### code: ' . $response['ref_num']);
             }
         } else {
-            $transaction->completion_status = $response['status'];
-            $transaction->save();
+            if ($transaction->completion_status != "1") {
+                $transaction->completion_status = $response['status'];
+                $transaction->save();
+            }
             return redirect()->route('dashboard')->with('warning', 'خطا در هنگام پرداخت:' . Transaction::getGatewayMessage($response['status']) . ' ### code: ' . $response['ref_num']);
         }
     }
